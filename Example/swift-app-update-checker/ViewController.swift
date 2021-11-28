@@ -20,7 +20,7 @@ class ViewController: UIViewController {
                 
                 print("update available : \(isAvailable)")
                 print("local app version : \(localVersion)")
-                print("update available : \(storeVersion)")
+                print("store app version : \(storeVersion)")
                 
                 if isAvailable{
                     self.showAppUpdateAlert(Version: storeVersion, Force: false, AppURL: "Your app url on store")
