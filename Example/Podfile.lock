@@ -1,0 +1,16 @@
+PODS:
+  - swift-app-update-checker (0.1.0)
+
+DEPENDENCIES:
+  - swift-app-update-checker (from `../`)
+
+EXTERNAL SOURCES:
+  swift-app-update-checker:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  swift-app-update-checker: 929a37a220a6ea62701c3c5b701b6191bfeb2989
+
+PODFILE CHECKSUM: 423be21fa6121b305c41ab43fec0f9b2a01f2cfd
+
+COCOAPODS: 1.11.2

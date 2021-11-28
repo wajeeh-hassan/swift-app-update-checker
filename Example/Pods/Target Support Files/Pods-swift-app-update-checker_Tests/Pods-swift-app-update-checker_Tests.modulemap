@@ -1,0 +1,6 @@
+framework module Pods_swift_app_update_checker_Tests {
+  umbrella header "Pods-swift-app-update-checker_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

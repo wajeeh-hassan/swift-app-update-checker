@@ -1,0 +1,6 @@
+framework module swift_app_update_checker {
+  umbrella header "swift-app-update-checker-umbrella.h"
+
+  export *
+  module * { export * }
+}

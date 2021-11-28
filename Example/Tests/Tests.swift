@@ -1,5 +1,4 @@
 import XCTest
-import swift-app-update-checker
 
 class Tests: XCTestCase {
     

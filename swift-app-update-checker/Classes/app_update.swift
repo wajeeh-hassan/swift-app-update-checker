@@ -5,14 +5,14 @@ open class AppUpdateChecker {
 
    
     
-    public func checkAppUpdate(completion:@escaping(Bool,String?,String?)->Void){
+    public func isUpdateAvailable(completion:@escaping(Bool,String,String)->Void){
         
         do {
             guard let info = Bundle.main.infoDictionary,
                   let currentVersion = info["CFBundleShortVersionString"] as? String,
                   let identifier = info["CFBundleIdentifier"] as? String,
                   let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(identifier)") else {
-                      completion(false,nil,nil)
+                      completion(false,"","")
                       return
              }
                         
@@ -42,26 +42,70 @@ open class AppUpdateChecker {
             }
             
         } catch let error {
-            completion(false,nil,nil)
+            completion(false,"","")
         }
        
     }
  
    
-//    static func openAppStore() {
-//
-//        if let url = URL(string: AppData.appUpdateUrl),
-//           UIApplication.shared.canOpenURL(url){
-//            UIApplication.shared.open(url, options: [:]) { (opened) in
-//                if(opened){
-//                    print("App Store Opened")
-//                }
-//            }
-//        } else {
-//            print("Can't Open URL on Simulator")
-//        }
-//    }
-//
+ public func openAppStore(AppURL: String) {
+
+        if let url = URL(string: AppURL),
+           UIApplication.shared.canOpenURL(url){
+            
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+            
+           
+        } else {
+            print("Can't Open URL on Simulator")
+        }
+    }
+
     
 
+    
+    
+    public  func showAppUpdateAlert(vc: UIViewController, Version : String, Force: Bool, AppURL: String) {
+    
+        let appName = Bundle.appName()
+
+         let alertTitle = "New Version"
+         let alertMessage = "\(appName) Version \(Version) is available on AppStore."
+
+         let alertController = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+
+         if !Force {
+             let notNowButton = UIAlertAction(title: "Not Now", style: .default)
+             alertController.addAction(notNowButton)
+         }
+
+         let updateButton = UIAlertAction(title: "Update", style: .default) { (action:UIAlertAction) in
+             guard let url = URL(string: AppURL) else {
+                 return
+             }
+             if #available(iOS 10.0, *) {
+                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
+             } else {
+                 UIApplication.shared.openURL(url)
+             }
+         }
+
+         alertController.addAction(updateButton)
+         vc.present(alertController, animated: true, completion: nil)
+
+       
+     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

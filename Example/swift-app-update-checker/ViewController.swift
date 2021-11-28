@@ -7,12 +7,26 @@
 //
 
 import UIKit
+import swift_app_update_checker
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        DispatchQueue.main.async {
+            AppUpdateChecker.shared.isUpdateAvailable{ isAvailable, localVersion, storeVersion  in
+                
+                print("update available : \(isAvailable)")
+                print("local app version : \(localVersion)")
+                print("update available : \(storeVersion)")
+                
+                if isAvailable{
+                    self.showAppUpdateAlert(Version: storeVersion, Force: false, AppURL: "Your app url on store")
+                }
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
