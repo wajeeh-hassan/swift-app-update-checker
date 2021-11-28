@@ -15,7 +15,6 @@ A very simple solution check new version of your application is available on sto
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Requirements
 
 ## Installation
 
